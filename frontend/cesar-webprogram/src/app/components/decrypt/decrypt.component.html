@@ -1,0 +1,12 @@
+<div>
+  <h2>Descriptografar Texto</h2>
+  <label for="text">Texto criptografado:</label>
+  <input id="text" [(ngModel)]="text" placeholder="Digite o texto criptografado" />
+
+  <label for="shift">Deslocamento (Shift):</label>
+  <input id="shift" [(ngModel)]="shift" type="number" placeholder="Digite o valor do deslocamento" />
+
+  <button (click)="onDecrypt()">Descriptografar</button>
+
+  <p *ngIf="decryptedText">Texto Descriptografado: {{ decryptedText }}</p>
+</div>

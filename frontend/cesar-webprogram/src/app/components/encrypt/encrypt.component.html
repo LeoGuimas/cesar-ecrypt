@@ -1,0 +1,12 @@
+<div>
+  <h2>Criptografar Texto</h2>
+  <label for="text">Texto:</label>
+  <input id="text" [(ngModel)]="text" placeholder="Digite o texto" />
+
+  <label for="shift">Deslocamento (Shift):</label>
+  <input id="shift" [(ngModel)]="shift" type="number" placeholder="Digite o valor do deslocamento" />
+
+  <button (click)="onEncrypt()">Criptografar</button>
+
+  <p *ngIf="encryptedText">Texto Criptografado: {{ encryptedText }}</p>
+</div>
