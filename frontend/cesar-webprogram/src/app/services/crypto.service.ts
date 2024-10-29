@@ -7,17 +7,15 @@ import { CipherText } from '../models/cypher-text.model';
   providedIn: 'root'
 })
 export class CryptoService {
-  private apiUrl = 'http://127.0.0.1:8000'; // backend url
+  private apiUrl = 'http://localhost:8000/api'; // URL base do backend
 
-  constructor( private htpp: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // cryptography methods
-  encrypt(data:CipherText): Observable<any>{
-    return this.htpp.post(`${this.apiUrl}/encrypt`, data);
+  decrypt(data: CipherText): Observable<{ decrypted_text: string }> {
+    return this.http.post<{ decrypted_text: string }>(`${this.apiUrl}/decrypt`, data);
   }
 
-  decrypt(data:CipherText): Observable<any>{
-    return this.htpp.post(`${this.apiUrl}/decrypt`, data);
+  encrypt(data: CipherText): Observable<{ encrypted_text: string }> {
+    return this.http.post<{ encrypted_text: string }>(`${this.apiUrl}/encrypt`, data);
   }
-
 }

@@ -1,31 +1,32 @@
-import { CryptoService } from '../../services/crypto.service';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CryptoService } from '../../services/crypto.service';
 import { CipherText } from '../../models/cypher-text.model';
-import { FormsModule } from '@angular/forms'; // Importação necessária
 
 @Component({
   selector: 'app-encrypt',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './encrypt.component.html',
-  styleUrl: './encrypt.component.scss'
+  styleUrls: ['./encrypt.component.scss']
 })
 export class EncryptComponent {
-  text = '';             // Texto a ser criptografado
-  shift = 3;             // Valor do deslocamento
-  encryptedText = '';    // Resultado do texto criptografado
+  text = '';
+  shift = 3;
+  encryptedText: string | null = null;
 
   constructor(private cryptoService: CryptoService) {}
 
   onEncrypt() {
     const data: CipherText = { text: this.text, shift: this.shift };
-    this.cryptoService.encrypt(data).subscribe(
-      response => {
-        this.encryptedText = response.encrypted_text; // Atualiza o resultado com o texto criptografado
+    this.cryptoService.encrypt(data).subscribe({
+      next: response => {
+        this.encryptedText = response.encrypted_text;
       },
-      error => {
+      error: error => {
         console.error('Erro ao criptografar:', error);
       }
-    );
+    });
   }
 }
