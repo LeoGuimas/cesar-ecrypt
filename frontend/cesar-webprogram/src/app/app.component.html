@@ -1,1 +1,7 @@
-<app-decrypt></app-decrypt>
+<div *ngIf="showEncrypt">
+  <app-encrypt></app-encrypt>
+</div>
+<div *ngIf="!showEncrypt">
+  <app-decrypt></app-decrypt>
+</div>
+<button (click)="toggleComponent()">Toggle Component</button>
